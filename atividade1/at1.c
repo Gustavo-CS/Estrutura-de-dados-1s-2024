@@ -4,7 +4,11 @@
 int main(int argc, char *argv[])
 {
 	int array[argc - 1];
-
+	if (argc <= 1)
+	{
+		printf("Erro!\nNenhum numero informado");
+		exit(0);
+	}
 	for (int i = 1; i < argc; i++)
 	{
 		array[i - 1] = atoi(argv[i]);
