@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "bubble_sort.h"
+// #include "bubble_sort.h"
+#include "quick_sort.h"
 
 int main(int argc, char *argv[])
 {
@@ -13,7 +14,7 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    int *ptr;
+    int *arr;
     int size = 0;
     int txt;
 
@@ -23,8 +24,8 @@ int main(int argc, char *argv[])
     }
     fclose(arq);
 
-    ptr = (int *)malloc(size * sizeof(int));
-    if (ptr == NULL)
+    arr = (int *)malloc(size * sizeof(int));
+    if (arr == NULL)
     {
         printf("Erro!\n");
         return 0;
@@ -36,37 +37,19 @@ int main(int argc, char *argv[])
         arq = fopen(argv[1], "r");
         while (fscanf(arq, "%d", &txt) != EOF)
         {
-            ptr[h] = txt;
+            arr[h] = txt;
             h++;
         }
         fclose(arq);
 
-        bubble_sort(ptr, size);
-
-        int valor2;
-        int valor;
-
-        for (int i = 0; i < size; i++)
-        {
-            valor = ptr[i];
-            valor2 = ptr[i];
-            for (int j = i; j < size; j++)
-            {
-                if (valor > ptr[j])
-                {
-                    valor2 = ptr[j];
-                    ptr[j] = valor;
-                    ptr[i] = valor2;
-                    valor = valor2;
-                }
-            }
-        }
+        // bubble_sort(arr, size);
+        quickSort(0,size-1,arr);
 
         arq2 = fopen("saida.txt", "w");
 
         for (int i = 0; i < size; i++)
         {
-            fprintf(arq2, "%d\n", ptr[i]);
+            fprintf(arq2, "%d\n", arr[i]);
         }
         fclose(arq2);
     }
