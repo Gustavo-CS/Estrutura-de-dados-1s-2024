@@ -1,16 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "linked_list.h"
+#include "lista_ligada.h"
 
 int main(int argc,char *argv[]) {
-    No* n1 = no('A', NULL);
-    No* n2 = no('B', NULL);
-    No* n3 = no('C', NULL);
-    No* n4 = no('B', NULL);
+    No* n1 = noo('A', NULL);
+    No* n2 = noo('B', NULL);
+    No* n3 = noo('C', NULL);
+    No* n4 = noo('B', NULL);
+    No* n5 = noo('H', NULL);
 
     n1->proximo_no = n2;
     n2->proximo_no = n3;
     n3->proximo_no = n4;
+    n4->proximo_no = n5;
 
     No* h = n1;
     // No* h;
@@ -23,14 +25,23 @@ int main(int argc,char *argv[]) {
     
     // No* h2 = copiar_list(h);
 
-    // imprimir_list(h);
+    imprimir_list(h);
+    printf("\n");
+    // lista_imprimir_inversa(h);
 
     // liberar_lista(h2);
+
+    lista_inserir_no_i(h, noo('X', NULL), 0);
+    // lista_inserir_no_i(h, 'X', 1);
+    printf("\n");
+
+    imprimir_list(h);
+
 
     // printf("\nqnt = %d \n", quantidade_nos(h));
     // printf("\nqnt = %d \n", quantidade_nos(h2));
 
-    printf("%d",lista_verificar_ocorrencia(h, 'B'));
+    // printf("%d",lista_verificar_ocorrencia(h, 'H'));
     // if(lista_verificar_existencia(h, 'B') == 0){
     //     printf("B nao esta na lista");
     // }
