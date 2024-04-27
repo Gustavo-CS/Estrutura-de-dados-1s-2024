@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "lista_ligada.h"
 
-No *noo(char valor, No *proximo_no)
+No *no(char valor, No *proximo_no)
 {
     No *no = malloc(sizeof(No));
     no->valor = valor;
@@ -47,7 +47,7 @@ No *copiar_list(No *H)
 {
     if (H != NULL)
     {
-        return noo(H->valor, copiar_list(H->proximo_no));
+        return no(H->valor, copiar_list(H->proximo_no));
     }
     else
     {
@@ -61,7 +61,7 @@ void liberar_lista(No *H)
     {
         liberar_lista(H->proximo_no);
         free(H);
-        H = NULL;
+        // H = NULL;
     }
 }
 
@@ -100,75 +100,86 @@ void lista_imprimir_inversa(No *H)
     }
 }
 
-// No *passar_no(No *H)
-// {
-//     return H->proximo_no;
-// }
-
-// void lista_inserir_no_i(No* H, char caractere, int i){
-//     if(H != NULL && i >= 0){
-//         if(i == 0){
-//             No* novo_no = no(caractere, H -> proximo_no);
-//             H -> proximo_no = novo_no;
-//             return;
-//         }
-//         lista_inserir_no_i(H->proximo_no, caractere, i - 1);
-//     }
-// }
-
-void lista_inserir_no_i(No *H, No *no, int i)
+void lista_inserir_no_i(No *H, No *noo, int i)
 {
-    if (H != NULL && i>=0)
+    if (H != NULL && i >= 0)
     {
-        // printf("not null\n");
-
-        // if(H->valor == valor_busca){
-        //     return 1;
-        // }
-        // return lista_verificar_existencia(H->proximo_no, valor_busca);
-        // No *x = copiar_list(H->proximo_no);
         if (i == 1)
         {
-            // printf("aaaaaa");
-            no->proximo_no = H->proximo_no;
-            H->proximo_no = no;
-            // return;
-        }
-        else if(i==0) {
-            // printf("ci");
-            No* aux = noo(H->valor, H->proximo_no);
-            // No* n6 = noo('H', NULL);
-            // aux->valor=H->valor;
-            // aux->proximo_no=H->proximo_no;
-            // printf("\n \n valor %c \n", no->valor);
-            H->valor=no->valor;
-            no->valor=aux->valor;
-            H->proximo_no=no;
-            no->proximo_no=aux->proximo_no;
-            free(aux);
-
-
+            noo->proximo_no = H->proximo_no;
+            H->proximo_no = noo;
             return;
         }
-        else if(i>1);
+        else if (i == 0)
         {
-            // printf("recursao %d\n", i);
-            lista_inserir_no_i(H->proximo_no, no, i - 1);
+            No *aux = no(H->valor, H->proximo_no);
+            // No *aux = H;
+
+            // printf("\n&aux = %p, &H = %p\n", &aux, &H);
+
+            H->valor = noo->valor;
+            noo->valor = aux->valor;
+            H->proximo_no = noo;
+            noo->proximo_no = aux->proximo_no;
+            free(aux);
+            return;
         }
-
-        // for (int j = 0; j < i; j++)
-        // {
-        //     copiar_list(x->proximo_no);
-
-        //     if (x->proximo_no != NULL)
-        //     {
-        //         // x->valor=H->valor;
-        //         if (j == i)
-        //         {
-        //             H->valor = no->valor;
-        //             no->proximo_no = H->proximo_no;
-        //         }
-        //     }
-        // }
+        else if (i > 1)
+        {
+            lista_inserir_no_i(H->proximo_no, noo, i - 1);
+        }
     }
+    return;
+}
+
+void lista_remover_no_i(No *H, int i)
+{
+    if (H != NULL && i >= 0 && i < quantidade_nos(H))
+    {
+        if (i == 1)
+        {
+            No *no_removido = H->proximo_no;
+            H->proximo_no = H->proximo_no->proximo_no;
+            free(no_removido);
+            return;
+        }
+        else if (i == 0)
+        {
+            No *no_removido = H->proximo_no;
+            H->valor = H->proximo_no->valor;
+            H->proximo_no = H->proximo_no->proximo_no;
+            free(no_removido);
+            return;
+        }
+        else if (i > 1)
+        {
+            lista_remover_no_i(H->proximo_no, i - 1);
+        }
+    }
+    return;
+}
+
+void lista_remover_no(No *H, char valor_busca)
+{
+    if (H != NULL && H->proximo_no != NULL)
+    {
+        if (H->proximo_no->valor == valor_busca)
+        {
+            No *no_removido = H->proximo_no;
+            H->proximo_no = H->proximo_no->proximo_no;
+            free(no_removido);
+        }
+        else if (H->valor == valor_busca)
+        {
+            No *no_removido = H->proximo_no;
+            // H->proximo_no = H->proximo_no->proximo_no;
+            H->valor=H->proximo_no->valor;
+            H->proximo_no=H->proximo_no->proximo_no;
+            free(no_removido);
+
+        }
+        
+        lista_remover_no(H->proximo_no, valor_busca);
+    }
+    return;
 }

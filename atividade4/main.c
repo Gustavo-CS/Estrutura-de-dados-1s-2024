@@ -2,63 +2,62 @@
 #include <stdlib.h>
 #include "lista_ligada.h"
 
-int main(int argc,char *argv[]) {
-    No* n1 = noo('A', NULL);
-    No* n2 = noo('B', NULL);
-    No* n3 = noo('C', NULL);
-    No* n4 = noo('B', NULL);
-    No* n5 = noo('H', NULL);
+int main(int argc, char *argv[])
+{
+    No *n1 = no('A', NULL);
+    No *n2 = no('B', NULL);
+    No *n3 = no('C', NULL);
+    No *n4 = no('A', NULL);
+    No *n5 = no('H', NULL);
 
     n1->proximo_no = n2;
     n2->proximo_no = n3;
     n3->proximo_no = n4;
-    n4->proximo_no = n5;
 
-    No* h = n1;
-    // No* h;
+    No *h = n1;
 
-    // inserir_no(h, n4);
-
-    // lista_inserir_no_i(h, n4, 1);
-
-    // imprimir_list(h);
-    
-    // No* h2 = copiar_list(h);
-
-    imprimir_list(h);
-    printf("\n");
-    // lista_imprimir_inversa(h);
-
-    // liberar_lista(h2);
-
-    lista_inserir_no_i(h, noo('X', NULL), 0);
-    // lista_inserir_no_i(h, 'X', 1);
-    printf("\n");
-
+    inserir_no(h, n5);
+    printf("lista apos inserir o no n5:\t");
     imprimir_list(h);
 
+    printf("\ntamanho da lista = %d\n", quantidade_nos(h));
 
-    // printf("\nqnt = %d \n", quantidade_nos(h));
-    // printf("\nqnt = %d \n", quantidade_nos(h2));
+    No *copia = copiar_list(h);
 
-    // printf("%d",lista_verificar_ocorrencia(h, 'H'));
-    // if(lista_verificar_existencia(h, 'B') == 0){
-    //     printf("B nao esta na lista");
-    // }
-    // else {
-    //     printf("B esta na lista");
+    printf("lista copiada:\t");
+    imprimir_list(copia);
+    printf("\n");
 
-    // }
+    liberar_lista(copia);
 
-    
-    // do
-    // {
-    //     printf("%c \t", h->valor);
-    //     h = h->proximo_no;
-    // } while (h != NULL);
-    
-    
-    // printf("n1 = %c \t n2 = %c", n1->valor, n2->valor);
+    if (lista_verificar_existencia(h, 'B') == 0)
+    {
+        printf("B nao esta na lista");
+    }
+    else
+    {
+        printf("B esta na lista\n");
+    }
+
+    printf("a letra B aparece %d vezes\n", lista_verificar_ocorrencia(h, 'B'));
+
+    printf("lista invertida:\t");
+    lista_imprimir_inversa(h);
+
+    lista_inserir_no_i(h, no('G', NULL), 2);
+    printf("\n");
+    printf("lista apos inserir o no G no indice 2:\t");
+    imprimir_list(h);
+
+    lista_remover_no_i(h, 1);
+    printf("\n");
+    printf("lista apos remover o no no indice 1:\t");
+    imprimir_list(h);
+
+    lista_remover_no(h, 'A');
+    printf("\n");
+    printf("lista apos remover os nos A:\t");
+    imprimir_list(h);
 
     exit(0);
 }
