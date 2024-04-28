@@ -18,6 +18,9 @@ int main(int argc, char *argv[])
     int size = 0;
     char c;
 
+    double inclinacao = 0;
+    double intercepcao = 0;
+
     FILE *arq;
     FILE *arq2;
 
@@ -34,26 +37,32 @@ int main(int argc, char *argv[])
     }
     fclose(arq);
 
-    double arrX = (double *)malloc(size * sizeof(double));
-    double arrY = (double *)malloc(size * sizeof(double));
+    double *arrX = (double *)malloc(size * sizeof(double));
+    double *arrY = (double *)malloc(size * sizeof(double));
     int index = 0;
     arq = fopen(argv[1], "r");
     while (fscanf(arq, "%lf%c%lf", &x, &c, &y) != EOF)
     {
         arrX[index] = x;
         arrY[index] = y;
+        media_x += x;
+        media_y += y;
         index++;
     }
     fclose(arq);
+    media_x /= size;
+    media_y /= size;
+    // printf("media x = %lf, media y = %lf\n", media_x, media_y);
 
-    // printf("%d", size);
-
-    for (int i = 0; i < size; i++){
-        printf("x = %lf, y = %lf", arrX[i], arrY[i]);
+    for (int i = 0; i < size; i++)
+    {
+        somatorio1 += ((arrX[i] - media_x) * (arrY[i] - media_y));
+        somatorio2 += ((arrX[i] - media_x) * (arrX[i] - media_x));
     }
 
+    inclinacao = somatorio1 / somatorio2;
 
-    // for ()
-    // {
-    // }
+    intercepcao = media_y - (inclinacao * media_x);
+
+    printf("y = %.1lfx + %.0lf", inclinacao, intercepcao);
 }
