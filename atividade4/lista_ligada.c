@@ -61,7 +61,6 @@ void liberar_lista(No *H)
     {
         liberar_lista(H->proximo_no);
         free(H);
-        // H = NULL;
     }
 }
 
@@ -113,10 +112,6 @@ void lista_inserir_no_i(No *H, No *noo, int i)
         else if (i == 0)
         {
             No *aux = no(H->valor, H->proximo_no);
-            // No *aux = H;
-
-            // printf("\n&aux = %p, &H = %p\n", &aux, &H);
-
             H->valor = noo->valor;
             noo->valor = aux->valor;
             H->proximo_no = noo;
