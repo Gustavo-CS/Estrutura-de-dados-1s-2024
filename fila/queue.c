@@ -36,6 +36,7 @@ void enqueue(QueueNode **root, char data)
         }
     }
 }
+
 char dequeue(QueueNode **root)
 {
     if (isEmpty(*root))
@@ -51,6 +52,7 @@ char dequeue(QueueNode **root)
         return tmpData;
     }
 }
+
 char peek(QueueNode *root)
 {
     if (isEmpty(root))
@@ -61,10 +63,12 @@ char peek(QueueNode *root)
         return root->data;
     }
 }
+
 int isEmpty(QueueNode *root)
 {
     return root == NULL;
 }
+
 void display(QueueNode *root) {
     QueueNode* tmp = root;
     while (tmp != NULL)

@@ -10,10 +10,14 @@ int main(){
     enqueue(&root, 'C');
     enqueue(&root, 'D');
 
-    printf("%c \n", peek(root));
-    printf("%c \n", dequeue(&root));
+    printf("%c ", peek(root));
+    printf("%c ", dequeue(&root));
+    printf("%c ", peek(root));
+    printf("%c ", dequeue(&root));
+    printf("%c ", peek(root));
+    printf("%c ", dequeue(&root));
+    printf("%c ", peek(root));
+    printf("%c ", dequeue(&root));
+    enqueue(&root, 'A');
     display(root);
-
-    // printf("%c %c %c %c %c \n", dequeue(&root), 
-    // dequeue(&root), dequeue(&root), dequeue(&root), dequeue(&root));
 }
