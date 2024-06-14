@@ -11,7 +11,7 @@ void inserir(Node **node, int data)
             printf("impossivel adiconar valores duplicados\n");
             return;
         }
-        if ((*node)->data <= data)
+        if (data > (*node)->data)
         {
             if ((*node)->right != NULL)
             {
@@ -52,29 +52,6 @@ void inserir(Node **node, int data)
     return;
 }
 
-int buscar(Node *node, int data)
-{
-    if (node != NULL)
-    {
-        if (node->data == data)
-        {
-            return 1;
-        }
-        else if (node->data < data)
-        {
-            buscar(node->right, data);
-        }
-        else if (node->data > data)
-        {
-            buscar(node->left, data);
-        }
-    }
-    else
-    {
-        return 0;
-    }
-}
-
 void in_order(Node *node)
 {
     if (node != NULL)
@@ -102,6 +79,29 @@ void post_order(Node *node)
         post_order(node->left);
         post_order(node->right);
         printf("%d ", node->data);
+    }
+}
+
+int buscar(Node *node, int data)
+{
+    if (node != NULL)
+    {
+        if (node->data == data)
+        {
+            return 1;
+        }
+        else if (node->data < data)
+        {
+            buscar(node->right, data);
+        }
+        else if (node->data > data)
+        {
+            buscar(node->left, data);
+        }
+    }
+    else
+    {
+        return 0;
     }
 }
 

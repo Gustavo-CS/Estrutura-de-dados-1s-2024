@@ -6,7 +6,6 @@ typedef struct Node
     struct Node *left;
 } Node;
 
-
 void inserir(Node **node, int data);
 int buscar(Node *node, int data);
 void in_order(Node *node);
