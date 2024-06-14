@@ -28,6 +28,8 @@ int main(int argc, char *argv[])
     post_order(node);
 
     remover(&node, 8);
+    remover(&node, 5);
+    remover(&node, 1);
     
     printf("\n");
     in_order(node);

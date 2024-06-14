@@ -62,25 +62,11 @@ int buscar(Node *node, int data)
         }
         else if (node->data < data)
         {
-            if (node->right != NULL)
-            {
-                buscar(node->right, data);
-            }
-            else
-            {
-                return 0;
-            }
+            buscar(node->right, data);
         }
         else if (node->data > data)
         {
-            if (node->left != NULL)
-            {
-                buscar(node->left, data);
-            }
-            else
-            {
-                return 0;
-            }
+            buscar(node->left, data);
         }
     }
     else
@@ -119,28 +105,41 @@ void post_order(Node *node)
     }
 }
 
-void remover(Node **node, int data) {
-    if (*node == NULL) {
+void remover(Node **node, int data)
+{
+    if (*node == NULL)
+    {
         return;
     }
-    
-    if ((*node)->data < data) {
+
+    if ((*node)->data < data)
+    {
         remover(&(*node)->right, data);
-    } else if ((*node)->data > data) {
+    }
+    else if ((*node)->data > data)
+    {
         remover(&(*node)->left, data);
-    } else {
+    }
+    else
+    {
         Node *temp;
-        if ((*node)->left == NULL) {
+        if ((*node)->left == NULL)
+        {
             temp = *node;
             *node = (*node)->right;
             free(temp);
-        } else if ((*node)->right == NULL) {
+        }
+        else if ((*node)->right == NULL)
+        {
             temp = *node;
             *node = (*node)->left;
             free(temp);
-        } else {
+        }
+        else
+        {
             temp = (*node)->right;
-            while (temp->left != NULL) {
+            while (temp->left != NULL)
+            {
                 temp = temp->left;
             }
             (*node)->data = temp->data;
